@@ -14,9 +14,9 @@ import java.util.List;
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cartId;
-    private int numberOfProducts;
-    private double totalPrice;
+    private Long cartId;
+    private Integer numberOfProducts;
+    private Double totalPrice;
     @CreationTimestamp
     @Column(columnDefinition = "Timestamp")
     private LocalDateTime creationDateTime;
