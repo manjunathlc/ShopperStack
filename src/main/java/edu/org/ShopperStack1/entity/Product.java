@@ -21,5 +21,6 @@ public class Product {
 
     @ManyToOne
     @JoinColumn
+    @JsonIgnore
     private Cart cart;
 }
