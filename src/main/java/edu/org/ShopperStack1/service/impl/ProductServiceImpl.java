@@ -20,6 +20,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductDao productDao;
 
+    @Override
     public ResponseEntity<ResponseStructure<Product>> saveProduct(Product product) {
 
         Product savedProduct = productDao.saveProduct(product);
@@ -30,6 +31,7 @@ public class ProductServiceImpl implements ProductService {
         return new ResponseEntity<ResponseStructure<Product>>(structure, HttpStatus.CREATED);
     }
 
+    @Override
     public ResponseEntity<ResponseStructure<Product>> getProductById(Long productId) {
         //Product product = productDao.findById(productId).orElseThrow(() -> new ProductNotFoundException("Product not found with product id = " + productId));
         Optional<Product> optional = productDao.findById(productId);
@@ -54,6 +56,19 @@ public class ProductServiceImpl implements ProductService {
             return new ResponseEntity<ResponseStructure<List<Product>>>(structure, HttpStatus.OK);
         }
         return new ResponseEntity<ResponseStructure<List<Product>>>(HttpStatus.NO_CONTENT);
+    }
+
+    @Override
+    public ResponseEntity<ResponseStructure<String>> deleteProductById(Long productId) {
+        if(productDao.findById(productId).isPresent()){
+            productDao.deleteById(productId);
+            ResponseStructure<String> structure = new ResponseStructure<>();
+            structure.setData("Product deleted successfully");
+            structure.setMessage("Product deleted successfully");
+            structure.setStatusCode(HttpStatus.OK.value());
+            return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.OK);
+        }
+        throw new ProductNotFoundException("Product not found with product id = " + productId);
     }
 
 

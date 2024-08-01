@@ -12,4 +12,6 @@ public interface ProductService {
     ResponseEntity<ResponseStructure<Product>> getProductById(Long productId);
 
     ResponseEntity<ResponseStructure<List<Product>>> getAllProducts();
+
+    ResponseEntity<ResponseStructure<String>> deleteProductById(Long productId);
 }
