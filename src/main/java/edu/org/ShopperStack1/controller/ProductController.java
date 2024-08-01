@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/products")
@@ -26,6 +28,12 @@ public class ProductController {
     ResponseEntity<ResponseStructure<Product>> getProductById(@PathVariable Long productId){
         return productService.getProductById(productId);
     }
+
+    @RequestMapping("/getAll")
+    ResponseEntity<ResponseStructure<List<Product>>> getAllProducts(){
+        return productService.getAllProducts();
+    }
+
 
 
 

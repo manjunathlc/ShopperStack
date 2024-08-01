@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,6 +41,19 @@ public class ProductServiceImpl implements ProductService {
             return new ResponseEntity<ResponseStructure<Product>>(structure, HttpStatus.FOUND);
         }
         throw new ProductNotFoundException("Product not found with product id = " + productId);
+    }
+
+    @Override
+    public ResponseEntity<ResponseStructure<List<Product>>> getAllProducts() {
+        List<Product> products = productDao.findAll();
+        if(!products.isEmpty()){
+            ResponseStructure<List<Product>> structure = new ResponseStructure<>();
+            structure.setData(products);
+            structure.setMessage("All products found successfully");
+            structure.setStatusCode(HttpStatus.OK.value());
+            return new ResponseEntity<ResponseStructure<List<Product>>>(structure, HttpStatus.OK);
+        }
+        return new ResponseEntity<ResponseStructure<List<Product>>>(HttpStatus.NO_CONTENT);
     }
 
 

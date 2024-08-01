@@ -6,6 +6,7 @@ import edu.org.ShopperStack1.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -21,6 +22,11 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public Optional<Product> findById(Long productId) {
         return productRepository.findById(productId);
+    }
+
+    @Override
+    public List<Product> findAll() {
+        return productRepository.findAll();
     }
 
 
