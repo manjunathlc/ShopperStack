@@ -17,5 +17,9 @@ public interface ProductDao {
 
     void deleteById(Long productId);
 
+    boolean isPresent(Long productId);
+
+    Product updateProductById(Long productId, Product updatedProduct);
+
 
 }

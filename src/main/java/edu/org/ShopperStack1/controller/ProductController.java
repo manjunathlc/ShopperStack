@@ -36,4 +36,9 @@ public class ProductController {
         return productService.deleteProductById(productId);
     }
 
+    @PutMapping("/update/{productId}")
+    ResponseEntity<ResponseStructure<Product>> updateProductById(@PathVariable Long productId, @RequestBody Product product){
+        return productService.updateProductById(productId, product);
+    }
+
 }

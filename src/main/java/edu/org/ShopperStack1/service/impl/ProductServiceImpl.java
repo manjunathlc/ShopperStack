@@ -71,5 +71,20 @@ public class ProductServiceImpl implements ProductService {
         throw new ProductNotFoundException("Product not found with product id = " + productId);
     }
 
+    @Override
+    public ResponseEntity<ResponseStructure<Product>> updateProductById(Long productId, Product updatedProduct) {
+        if(productDao.findById(productId).isPresent()){
+            updatedProduct.setProductId(productId);
+            Product updatedProductEntity = productDao.saveProduct(updatedProduct);
+            ResponseStructure<Product> structure = new ResponseStructure<>();
+            structure.setData(updatedProductEntity);
+            structure.setMessage("Product updated successfully");
+            structure.setStatusCode(HttpStatus.OK.value());
+            return new ResponseEntity<ResponseStructure<Product>>(structure, HttpStatus.OK);
+        }
+        throw new ProductNotFoundException("Product not found with product id = " + productId);
+
+    }
+
 
 }

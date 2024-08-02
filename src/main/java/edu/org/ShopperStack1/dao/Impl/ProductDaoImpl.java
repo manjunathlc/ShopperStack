@@ -13,6 +13,17 @@ import java.util.Optional;
 @Repository
 public class ProductDaoImpl implements ProductDao {
 
+    @Override
+    public boolean isPresent(Long productId) {
+        return productRepository.existsById(productId);
+    }
+
+    @Override
+    public Product updateProductById(Long productId, Product updatedProduct) {
+        return productRepository.save(updatedProduct);
+    }
+
+
     private final ProductRepository productRepository;
     @Override
     public Product saveProduct(Product product) {
